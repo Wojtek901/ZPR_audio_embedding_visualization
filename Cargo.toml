@@ -1,0 +1,29 @@
+[package]
+name = "ZPR_audio_embedding_visualization"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = { version = "0.8", features = ["multipart"] }
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.7", features = ["fs", "cors", "trace"] }
+
+# --- Serializacja danych (REST JSON + import embeddingów CSV) ---
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+csv = "1"
+
+# --- Wnioskowanie ML (ONNX Runtime, Hugging Face, tokenizacja, tensory) ---
+ort = "2.0.0-rc.15"
+hf-hub = "1.0"
+tokenizers = "0.23"
+ndarray = "0.17"
+
+# --- Dekodowanie i przetwarzanie sygnału audio (MP3/WAV/FLAC -> Log-Mel) ---
+symphonia = { version = "0.6", features = ["all"] }
+rubato = "5.1"
+realfft = "3.5"
+
+# --- Redukcja wymiarowości (UMAP + t-SNE) ---
+# Opcja 1 (zalecana): obie metody (UMAP i t-SNE) w jednej bibliotece
+manifolds-rs = "0.10"
