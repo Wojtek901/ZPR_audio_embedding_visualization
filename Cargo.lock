@@ -6,9 +6,11 @@ version = 4
 name = "ZPR_audio_embedding_visualization"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "axum",
  "csv",
  "hf-hub",
+ "http-body-util",
  "manifolds-rs",
  "ndarray",
  "ort",
@@ -17,9 +19,14 @@ dependencies = [
  "serde",
  "serde_json",
  "symphonia",
+ "thiserror 2.0.21",
  "tokenizers",
  "tokio",
+ "tower",
  "tower-http 0.7.1",
+ "tracing",
+ "tracing-subscriber",
+ "uuid",
 ]
 
 [[package]]
@@ -4699,6 +4706,7 @@ checksum = "3c14b15dffa2f4bd712103e857140aa04a4f2ff6e955c77d7eb8e53ee02a3b64"
 dependencies = [
  "getrandom 0.4.3",
  "js-sys",
+ "serde_core",
  "wasm-bindgen",
 ]
 
