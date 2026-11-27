@@ -23,9 +23,12 @@ pub enum ClapVariant {
     MusicAndSpeech,
 }
 
-impl ClapVariant{
-    pub fn hf_repo(&self) -> (&'static str, &'static str){
-        ("Xenova", "clap-htsat-unfused")
+impl ClapVariant {
+    pub fn hf_repo(&self) -> (&'static str, &'static str) {
+        match self {
+            Self::General => ("Xenova", "clap-htsat-unfused"),
+            Self::MusicAndSpeech => ("Xenova", "larger_clap_music_and_speech"),
+        }
     }
 }
 
@@ -59,14 +62,12 @@ impl EmbeddingModel for MockEmbedder {
     }
 
     fn embed_text(&self, _text: &str) -> Result<Embedding> {
-        let mut embedding: Embedding = Array1::linspace(0.0, 10.0, self.dim());
-        embedding = l2_normalize(embedding);
+        let embedding: Embedding = l2_normalize(Array1::linspace(0.0, 10.0, self.dim()));
         Ok(embedding)
     }
 
     fn embed_audio(&self, _audio_bytes: &[u8]) -> Result<Embedding> {
-        let mut embedding: Embedding = Array1::linspace(10.0, 20.0, self.dim());
-        embedding = l2_normalize(embedding);
+        let embedding: Embedding = l2_normalize(Array1::linspace(10.0, 20.0, self.dim()));
         Ok(embedding)
     }
 }
